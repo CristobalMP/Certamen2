@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmpleadoLibrary
 {
-    public class Class1
+    class Datos
     {
     }
 }
