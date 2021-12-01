@@ -13,16 +13,16 @@ namespace WEBApi.Controllers
     public class EmpleadoController : ApiController
     {
         [HttpGet]
-        [Route("api/v1/Empleado")]
+        [Route("api/v1/ListarEmpleado")]
         public Retorno listar(string rut = "")
         {
 
-            Retorno resp = new Retorno();
+            Retorno ret = new Retorno();
             try
             {
                 List<Empleado> listado = new List<Empleado>();
-                EmpleadoEntity clienteData = new EmpleadoEntity();
-                DataSet data = rut == "" ? clienteData.listadoEmpleado() : clienteData.listadoEmpleado(rut);
+                EmpleadoEntity EmpleadoData = new EmpleadoEntity();
+                DataSet data = rut == "" ? EmpleadoData.listadoEmpleado() : EmpleadoData.listadoEmpleado(rut);
                 for (int i = 0; i < data.Tables[0].Rows.Count; i++)
                 {
                     Empleado item = new Empleado();
@@ -33,26 +33,26 @@ namespace WEBApi.Controllers
                     item.telefono = data.Tables[0].Rows[i].ItemArray[4].ToString();
                     listado.Add(item);
                 }
-                //operacion correcta 
-                resp.error = false;
-                resp.mensaje = "ok";
+
+                ret.error = false;
+                ret.mensaje = "ok";
                 if (listado.Count > 0)
-                    resp.data = listado;
+                    ret.data = listado;
                 else
-                    resp.data = "No se encontro al empleado";
-                return resp;
+                    ret.data = "No se encontro al empleado";
+                return ret;
             }
             catch (Exception e)
             {
-                resp.error = true;
-                resp.mensaje = "Error:" + e.Message;
-                resp.data = null;
-                return resp;
+                ret.error = true;
+                ret.mensaje = "Error:" + e.Message;
+                ret.data = null;
+                return ret;
             }
         }
 
         [HttpPost]
-        [Route("api/v1/setEmpleado")]
+        [Route("api/v1/GuardarEmpleado")]
         public Retorno guardar(Empleado empleado)
         {
             Retorno ret = new Retorno();
@@ -63,61 +63,63 @@ namespace WEBApi.Controllers
 
                 if (estado == 1)
                 {
-                    resp.error = false;
-                    resp.mensaje = "Cliente ingresado";
-                    resp.data = cliente;
+                    ret.error = false;
+                    ret.mensaje = "Empleado Registrado";
+                    ret.data = empleado;
                 }
                 else
                 {
-                    resp.error = true;
-                    resp.mensaje = "No se realizo el ingre";
-                    resp.data = null;
+                    ret.error = true;
+                    ret.mensaje = "No se registro el Empleado";
+                    ret.data = null;
                 }
-                return resp;
+                return ret;
             }
             catch (Exception e)
             {
-                resp.error = true;
-                resp.mensaje = "Error:" + e.Message;
-                resp.data = null;
-                return resp;
+                ret.error = true;
+                ret.mensaje = "Error:" + e.Message;
+                ret.data = null;
+                return ret;
             }
         }
 
         [HttpDelete]
-        [Route("api/v1/deletecliente")]
-        public respuesta eliminar(string rut)
+        [Route("api/v1/DeleteEmpleado")]
+        public Retorno eliminar(string rut)
         {
-            respuesta resp = new respuesta();
+            Retorno ret = new Retorno();
             try
             {
 
-                clienteEntity cli = new clienteEntity();
-                cli.Rut = rut;
-                int estado = cli.eliminar();
+                EmpleadoEntity emp = new EmpleadoEntity();
+                emp.Rut = rut;
+                int estado = emp.eliminar();
 
                 if (estado == 1)
                 {
-                    resp.error = false;
-                    resp.mensaje = "Cliente eliminado";
-                    resp.data = null;
+                    ret.error = false;
+                    ret.mensaje = "Empleado eliminado";
+                    ret.data = null;
                 }
                 else
                 {
-                    resp.error = true;
-                    resp.mensaje = "No se realizo la eliminacion";
-                    resp.data = null;
+                    ret.error = true;
+                    ret.mensaje = "No se concluyo la eliminación";
+                    ret.data = null;
                 }
-                return resp;
+                return ret;
             }
             catch (Exception e)
             {
-                resp.error = true;
-                resp.mensaje = "Error:" + e.Message;
-                resp.data = null;
-                return resp;
+                ret.error = true;
+                ret.mensaje = "Error:" + e.Message;
+                ret.data = null;
+                return ret;
             }
 
 
         }
+    }
 }
+
