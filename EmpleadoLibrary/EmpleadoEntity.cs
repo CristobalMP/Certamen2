@@ -52,13 +52,28 @@ namespace EmpleadoLibrary
         {
             return data.ejecutar("Insert into EMPLEADO(rut, nombre, apellido, mail, telefono) values('" + empleado.Rut + "','" + empleado.Nombre + "','" + empleado.Apellido + "','" + empleado.Mail + "','" + empleado.Telefono + "')");
         }
+        
         public int guardar()
         {
             return data.ejecutar("Insert into EMPLEADO(rut, nombre, apellido, mail, telefono) values('" + this.rut + "','" + this.nombre + "','" + this.apellido + "','" + this.mail + "','" + this.telefono + "')");
         }
+       
         public int eliminar()
         {
             return data.ejecutar("DELETE FROM EMPLEADO WHERE rut = '" + this.rut + "'");
+        }
+
+        public bool validarut()
+        {
+            DataTable dt = new DataTable();
+            dt = data.listado("SELECT * FROM EMPLEADO WHERE rut = '" + rut + "'").Tables[0];
+            bool respuesta = true;
+            if (dt.Rows.Count >= 1)
+            {
+                respuesta = false;
+            }
+
+            return respuesta;
         }
     }
 }
