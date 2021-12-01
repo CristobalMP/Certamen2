@@ -13,7 +13,7 @@ namespace WEBApi.Controllers
     public class EmpleadoController : ApiController
     {
         [HttpGet]
-        [Route("api/v1/ListarEmpleado")]
+        [Route("api/c2/ListarEmpleado")]
         public Retorno listar(string rut = "")
         {
 
@@ -52,7 +52,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/v1/GuardarEmpleado")]
+        [Route("api/c2/GuardarEmpleado")]
         public Retorno guardar(Empleado empleado)
         {
             Retorno ret = new Retorno();
@@ -85,7 +85,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpDelete]
-        [Route("api/v1/DeleteEmpleado")]
+        [Route("api/c2/DeleteEmpleado")]
         public Retorno eliminar(string rut)
         {
             Retorno ret = new Retorno();
