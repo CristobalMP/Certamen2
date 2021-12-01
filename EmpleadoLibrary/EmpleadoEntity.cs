@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,36 +28,37 @@ namespace EmpleadoLibrary
         {
 
         }
-        public EmpleadoEntity(string rut, string nombre, string apellido, string telefono)
+        public EmpleadoEntity(string rut, string nombre, string apellido, string mail, string telefono)
         {
             this.rut = rut;
             this.nombre = nombre;
             this.apellido = apellido;
+            this.mail = mail;
             this.telefono = telefono;
         }
 
 
-        public DataSet listadoClientes()
+        public DataSet listadoEmpleado()
         {
-            return data.listado("SELECT * FROM CLIENTES");
+            return data.listado("SELECT * FROM EMPLEADO");
         }
 
-        public DataSet listadoClientes(string rut)
+        public DataSet listadoEmpleado(string rut)
         {
-            return data.listado("SELECT * FROM CLIENTES WHERE RUT = '" + rut + "'");
+            return data.listado("SELECT * FROM EMPLEADO WHERE rut = '" + rut + "'");
         }
 
-        public int guardar(clienteEntity cliente)
+        public int guardar(EmpleadoEntity empleado)
         {
-            return data.ejecutar("Insert into CLIENTES(rut, nombre, apellido, telefono) values('" + cliente.Rut + "','" + cliente.Nombre + "','" + cliente.Apellido + "','" + cliente.Telefono + "')");
+            return data.ejecutar("Insert into EMPLEADO(rut, nombre, apellido, mail, telefono) values('" + empleado.Rut + "','" + empleado.Nombre + "','" + empleado.Apellido + "','" + empleado.Mail + "','" + empleado.Telefono + "')");
         }
         public int guardar()
         {
-            return data.ejecutar("Insert into CLIENTES(rut, nombre, apellido, telefono) values('" + this.rut + "','" + this.nombre + "','" + this.apellido + "','" + this.telefono + "')");
+            return data.ejecutar("Insert into EMPLEADO(rut, nombre, apellido, mail, telefono) values('" + this.rut + "','" + this.nombre + "','" + this.apellido + "','" + this.mail + "','" + this.telefono + "')");
         }
         public int eliminar()
         {
-            return data.ejecutar("DELETE FROM CLIENTES WHERE RUT= '" + this.rut + "'");
+            return data.ejecutar("DELETE FROM EMPLEADO WHERE rut = '" + this.rut + "'");
         }
     }
 }

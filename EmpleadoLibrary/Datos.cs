@@ -42,8 +42,5 @@ namespace EmpleadoLibrary
             Desconectar();
             return resultado;
         }
-
-
-
     }
 }  
