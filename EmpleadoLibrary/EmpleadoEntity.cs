@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmpleadoLibrary
 {
-    class EmpleadoEntity
+    public class EmpleadoEntity
     {
 
         private string rut;
