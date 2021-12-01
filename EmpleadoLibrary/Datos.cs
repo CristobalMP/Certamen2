@@ -24,15 +24,7 @@ namespace EmpleadoLibrary
                 conexion.Close();
         }
 
-        public DataSet listado(string query)
-        {
-            Conectar();
-            DataSet data = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter(query, conexion);
-            adapter.Fill(data);
-            Desconectar();
-            return data;
-        }
+        
 
         public int ejecutar(string query)
         {
@@ -41,6 +33,16 @@ namespace EmpleadoLibrary
             int resultado = com.ExecuteNonQuery();
             Desconectar();
             return resultado;
+        }
+        
+        public DataSet listado(string query)
+        {
+            Conectar();
+            DataSet data = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, conexion);
+            adapter.Fill(data);
+            Desconectar();
+            return data;
         }
     }
 }  
