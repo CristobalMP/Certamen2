@@ -44,7 +44,7 @@ namespace WindowsForm
            }
            else
            {
-             MessageBox.Show("Rut ya registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             MessageBox.Show("Rut ya registrado. Ingrese Nuevamente al Empleado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
            }
 
                 txtRut.Clear();
