@@ -75,5 +75,16 @@ namespace EmpleadoLibrary
 
             return respuesta;
         }
+
+        public int editar(EmpleadoEntity empleado)
+        {
+            return data.ejecutar("UPDATE EMPLEADO SET nombre= '" + empleado.Nombre + "', apellido='" + empleado.Apellido + "', mail='" + empleado.Mail + "', telefono='" + empleado.Telefono + "' WHERE rut = '" + empleado.Rut + "'");
+        }
+
+        public int editar()
+        {
+            return data.ejecutar("UPDATE EMPLEADO SET nombre= '" + this.nombre + "', apellido='" + this.apellido + "', mail='" + this.mail + "', telefono='" + this.telefono + "' WHERE rut = '" + this.rut + "'");
+        }
+
     }
 }

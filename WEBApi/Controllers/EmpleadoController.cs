@@ -21,7 +21,7 @@ namespace WEBApi.Controllers
                 List<Empleado> listado = new List<Empleado>();
                 EmpleadoEntity EmpleadoData = new EmpleadoEntity();
                 DataSet data = EmpleadoData.listadoEmpleado();
-                //DataSet data = rut == "" ? EmpleadoData.listadoEmpleado() : EmpleadoData.listadoEmpleado(rut);
+                
                 for (int i = 0; i < data.Tables[0].Rows.Count; i++)
                 {
                     Empleado item = new Empleado();
@@ -96,6 +96,39 @@ namespace WEBApi.Controllers
                 {
                     ret.error = true;
                     ret.mensaje = "No se registro el Empleado";
+                    ret.data = null;
+                }
+                return ret;
+            }
+            catch (Exception e)
+            {
+                ret.error = true;
+                ret.mensaje = "Error:" + e.Message;
+                ret.data = null;
+                return ret;
+            }
+        }
+
+        [HttpPut]
+        [Route("api/v1/EditarEmpleado")]
+        public Retorno editar(Empleado empleado)
+        {
+            Retorno ret = new Retorno();
+            try
+            {
+                EmpleadoEntity emp = new EmpleadoEntity(empleado.rut, empleado.nombre, empleado.apellido, empleado.mail, empleado.telefono);
+                int estado = emp.editar();
+
+                if (estado == 1)
+                {
+                    ret.error = false;
+                    ret.mensaje = "Empleado Editado";
+                    ret.data = empleado;
+                }
+                else
+                {
+                    ret.error = true;
+                    ret.mensaje = "No se registro cambios en el empleado";
                     ret.data = null;
                 }
                 return ret;
