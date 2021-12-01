@@ -13,7 +13,7 @@ namespace WEBApi.Controllers
     public class EmpleadoController : ApiController
     {
         [HttpGet]
-        [Route("api/c2/ListarEmpleado")]
+        [Route("api/v1/ListarEmpleado")]
         public Retorno listar(string rut = "")
         {
 
@@ -33,7 +33,7 @@ namespace WEBApi.Controllers
                     item.telefono = data.Tables[0].Rows[i].ItemArray[4].ToString();
                     listado.Add(item);
                 }
-
+                
                 ret.error = false;
                 ret.mensaje = "ok";
                 if (listado.Count > 0)
@@ -52,7 +52,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/c2/GuardarEmpleado")]
+        [Route("api/v1/GuardarEmpleado")]
         public Retorno guardar(Empleado empleado)
         {
             Retorno ret = new Retorno();
@@ -85,7 +85,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpDelete]
-        [Route("api/c2/DeleteEmpleado")]
+        [Route("api/v1/DeleteEmpleado")]
         public Retorno eliminar(string rut)
         {
             Retorno ret = new Retorno();
