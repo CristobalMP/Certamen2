@@ -14,7 +14,32 @@ namespace WEBApi.Controllers
     {
         [HttpGet]
         [Route("api/v1/ListarEmpleado")]
-        public Retorno listar(string rut = "")
+        public List<Empleado> listar()        
+        {
+
+            
+                List<Empleado> listado = new List<Empleado>();
+                EmpleadoEntity EmpleadoData = new EmpleadoEntity();
+                DataSet data = EmpleadoData.listadoEmpleado();
+                //DataSet data = rut == "" ? EmpleadoData.listadoEmpleado() : EmpleadoData.listadoEmpleado(rut);
+                for (int i = 0; i < data.Tables[0].Rows.Count; i++)
+                {
+                    Empleado item = new Empleado();
+                    item.rut = data.Tables[0].Rows[i].ItemArray[0].ToString();
+                    item.nombre = data.Tables[0].Rows[i].ItemArray[1].ToString();
+                    item.apellido = data.Tables[0].Rows[i].ItemArray[2].ToString();
+                    item.mail = data.Tables[0].Rows[i].ItemArray[3].ToString();
+                    item.telefono = data.Tables[0].Rows[i].ItemArray[4].ToString();
+                    listado.Add(item);
+                }
+           
+            return listado;
+            
+        }
+
+        [HttpGet]
+        [Route("api/v1/BuscarEmpleado")]
+        public Retorno buscar(string rut = "")
         {
 
             Retorno ret = new Retorno();
@@ -33,7 +58,7 @@ namespace WEBApi.Controllers
                     item.telefono = data.Tables[0].Rows[i].ItemArray[4].ToString();
                     listado.Add(item);
                 }
-                
+
                 ret.error = false;
                 ret.mensaje = "ok";
                 if (listado.Count > 0)
